@@ -3,10 +3,16 @@
 
   "NAME": "Name",
   "EMAIL": "Email",
-  "USERNAME": "Username",
+  "USERNAME": "PIN/Username",
+  "FIRSTNAME": "Firstname",
+  "DOB": "Birthday",
+  "PHONE": "Phone",
+  "EMPLOYER": "Employer",
+  "SURNAME": "Surname",
   "PASSWORD": "Password",
   "LOGIN": "Sign in",
-  "SIGNUP": "Sign up",
+  "SIGNUP": "Register With Us",
+  "GUESTLOGIN": "Continue As Guest",
 
   "TAB1_TITLE": "Items",
   "TAB2_TITLE": "Search",
@@ -17,18 +23,18 @@
   "TUTORIAL_SKIP_BUTTON": "Skip",
   "TUTORIAL_CONTINUE_BUTTON": "Continue",
 
-  "TUTORIAL_SLIDE1_TITLE": "Welcome to the Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "The <b>Ionic Super Starter</b> is a fully-featured Ionic starter with many pre-built pages and best practices.",
+  "TUTORIAL_SLIDE1_TITLE": "Watch Your Retirement Savings Account Grow In Leaps & Bounds",
+  "TUTORIAL_SLIDE1_DESCRIPTION": "With IEI Anchor Pensions, you are guaranteed of maximum return on your investments.",
 
-  "TUTORIAL_SLIDE2_TITLE": "How to use the Super Starter",
-  "TUTORIAL_SLIDE2_DESCRIPTION": "Assemble the various page types you want and remove the ones you don't. We've provided many common mobile app page layouts, like login and signup pages, tabs, and this tutorial page.",
+  "TUTORIAL_SLIDE2_TITLE": "Easy Registration",
+  "TUTORIAL_SLIDE2_DESCRIPTION": "Start your pension plan today with IEI Anchor Pensions. The start up process is quick and easy.",
 
-  "TUTORIAL_SLIDE3_TITLE": "Getting Started",
-  "TUTORIAL_SLIDE3_DESCRIPTION": "Need help? Check out the Super Starter README for a full tutorial",
+  "TUTORIAL_SLIDE3_TITLE": "We have you covered",
+  "TUTORIAL_SLIDE3_DESCRIPTION": "With the Multi Fund Scheme, we have provisions for all ...self-employed, the informal sector (fashion designers, mechanics, market sellers, lawyers, taxi drivers, etc.) ",
 
-  "TUTORIAL_SLIDE4_TITLE": "Ready to Play?",
+  "TUTORIAL_SLIDE4_TITLE": "Ready to walk with us?",
 
-  "WELCOME_INTRO": "The starting point for your next great Ionic app",
+  "WELCOME_INTRO": "You don't have to be great at something to start, but you have to start to be great at something",
 
   "SETTINGS_TITLE": "Settings",
   "SETTINGS_OPTION1": "Option 1",
@@ -43,13 +49,15 @@
   "WELCOME_TITLE": "Welcome",
 
   "LOGIN_TITLE": "Sign in",
-  "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
+  "LOGIN_ERROR": "Unable to sign in. Please check your account information or your internet connection.",
   "LOGIN_BUTTON": "Sign in",
   "SIGNUP_TITLE": "Sign up",
   "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
-  "SIGNUP_BUTTON": "Sign up",
+  "SIGNUP_BUTTON": "Submit",
 
   "LIST_MASTER_TITLE": "Items",
+
+  "NEWS_MASTER_TITLE": "News",
 
   "ITEM_CREATE_TITLE": "New Item",
   "ITEM_CREATE_CHOOSE_IMAGE": "Add Image",

@@ -1,32 +1,12 @@
 import 'rxjs/add/operator/toPromise';
-
 import { Injectable } from '@angular/core';
-
 import { Api } from '../api/api';
 
-/**
- * Most apps have the concept of a User. This is a simple provider
- * with stubs for login/signup/etc.
- *
- * This User provider makes calls to our API at the `login` and `signup` endpoints.
- *
- * By default, it expects `login` and `signup` to return a JSON object of the shape:
- *
- * ```json
- * {
- *   status: 'success',
- *   user: {
- *     // User fields your app needs, like "id", "name", "email", etc.
- *   }
- * }Ø
- * ```
- *
- * If the `status` field is not `success`, then an error is detected and returned.
- */
 @Injectable()
 export class User {
   _user: any;
 
+  
   constructor(public api: Api) { }
 
   /**
@@ -34,16 +14,12 @@ export class User {
    * the user entered on the form.
    */
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+    let seq = this.api.get('AuthenticateUser', accountInfo).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      } else {
-      }
+      this._loggedIn(res);
     }, err => {
-      console.error('ERROR', err);
+      // console.error('ERROR', err);
     });
 
     return seq;
@@ -73,12 +49,14 @@ export class User {
    */
   logout() {
     this._user = null;
+    window.localStorage.clear();
   }
 
   /**
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    this._user = resp;
+    window.localStorage.setItem('profile', JSON.stringify(resp));
   }
 }

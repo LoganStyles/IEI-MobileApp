@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>My Account</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding class="page-background">
+    <p *ngIf="!RSABalance" class="white-bg" padding>Loading, please wait...</p>
+    <div padding class="white-bg">
+      <fieldset>
+        <legend>
+          Account Summary
+        </legend>
+        <strong>
+          Status:
+          <span [style.color]="getAccountStatusColor()">{{profile.AccountStatus}}</span>
+        </strong>
+        <p>
+          <strong>RSA Balance</strong>
+          <br>NGN {{RSABalance}}
+        </p>
+        <p>
+          <strong>Last Contribution Date</strong>
+          <br>{{profile.LastContributionDate | date: 'mediumDate'}}
+        </p>
+      </fieldset>
+      <hr>
+      <fieldset>
+        <legend>
+          Transaction History
+        </legend>
+        <ion-list>
+          <ion-item>
+            <ion-label>Start Date</ion-label>
+            <ion-datetime style="width: 60%" displayFormat="DD/MM/YYYY" [(ngModel)]="startDate"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>End Date</ion-label>
+            <ion-datetime style="width: 60%" displayFormat="DD/MM/YYYY" [(ngModel)]="endDate"></ion-datetime>
+          </ion-item>
+  
+          <ion-item *ngIf="pleaseWait === true" class="text-center">
+            Searching, please wait...
+          </ion-item>
+  
+          <button ion-button full (click)="searchTransactions()">
+            <ion-icon name="search"></ion-icon>
+            Search
+          </button>
+        </ion-list>
+      </fieldset>
+    </div>
+  </ion-content>

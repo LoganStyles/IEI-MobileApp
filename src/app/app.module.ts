@@ -1,17 +1,30 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Camera } from '@ionic-native/camera';
+import { Camera,} from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FileTransfer,FileTransferObject } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { Items } from '../mocks/providers/items';
 import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
+import { AccountProvider } from '../providers/account/account';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
+import { AccountHistoryPageModule } from '../pages/account-history/account-history.module';
+import { CalculatorOutputPageModule } from '../pages/calculator-output/calculator-output.module';
+import { WelcomePageModule } from '../pages/welcome/welcome.module';
+import { RegistrationPageModule } from '../pages/registration/registration.module';
+import { NewsDetailPageModule } from '../pages/news-detail/news-detail.module';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -36,11 +49,14 @@ export function provideSettings(storage: Storage) {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AccountHistoryPageModule,
+    CalculatorOutputPageModule,
+    WelcomePageModule,RegistrationPageModule,NewsDetailPageModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -58,13 +74,18 @@ export function provideSettings(storage: Storage) {
   providers: [
     Api,
     Items,
-    User,
+    User,AccountProvider,InAppBrowser,
     Camera,
     SplashScreen,
     StatusBar,
+    Network,
+    FileTransfer,FileTransferObject,FilePath,
+    File,Camera,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AccountProvider,
+    SocialSharing
   ]
 })
 export class AppModule { }

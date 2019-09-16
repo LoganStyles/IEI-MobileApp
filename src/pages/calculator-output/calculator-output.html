@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+      <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Pension Calculator</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="page-background calculator">
+  <ion-card>
+      <ion-card-header>
+          Estimated Result
+      </ion-card-header>
+      <ion-card-content>
+          <ion-list>
+              <ion-item>
+                  <ion-label stacked>What you will get at retirement?</ion-label>
+                  <ion-label>{{totalPackage | number: '.2'}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label stacked>Do I qualify for lumpsum payment?</ion-label>
+                  <ion-label>{{qualifyForLumpSum}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label stacked>My total lumpsum package:</ion-label>
+                  <ion-label>{{lumpSum | number: '.2'}}</ion-label>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label stacked>Do I qualify for programmed withdrawal?</ion-label>
+                  <ion-label>{{qualifyForProgrammedWithdrawal}}</ion-label>
+              </ion-item>
+
+              <ion-item *ngIf="qualifyForLumpSum === 'Yes'">
+                  <ion-label stacked>My monthly pension allowance:</ion-label>
+                  <ion-label>{{monthlyPension | number: '.2'}}</ion-label>
+              </ion-item>
+          </ion-list>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

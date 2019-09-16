@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Branches</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="page-background calculator">
+  <p *ngIf="!branches" class="white-bg" padding>Loading, please wait...</p>
+  <ion-searchbar *ngIf="branches" (ionInput)="filterBranches($event)"></ion-searchbar>
+  <ion-list>
+    <ion-card *ngFor="let branch of branches" (tap)="showDetails(branch)">
+      <ion-card-header class="list-header">{{branch.name}}</ion-card-header>
+      <ion-card-content *ngIf="selectedBranch && selectedBranch === branch">
+        <div class="text-center">
+          <div class="my-sub-header">Address</div>
+          <div>{{selectedBranch.address}}</div>
+
+          <div class="my-sub-header">Contact Person</div>
+          <div>{{selectedBranch.contact_person}}</div>
+
+          <div class="my-sub-header">Telephone</div>
+          <div>{{selectedBranch.telephone}}</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

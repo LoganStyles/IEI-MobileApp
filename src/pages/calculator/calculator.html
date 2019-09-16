@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+      <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Pension Calculator</ion-title>
+      <ion-buttons end padding>
+        <button (click)="backHome()">
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="page-background calculator">
+  <ion-card>
+    <ion-card-header>
+      Your Input
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>Current RSA Balance</ion-label>
+          <ion-input type="number" [(ngModel)]="rsaBalance"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Monthly contribution (Employer + Employee)</ion-label>
+          <ion-input type="number" [(ngModel)]="monthlyContribution"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>How many years do you have to retirement?</ion-label>
+          <ion-input type="number" [(ngModel)]="yearsToRetire"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>Expected Return on Pensions (%)</ion-label>
+          <ion-input type="number" [(ngModel)]="returnRate"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <button medium (click)="calculatePension()">Calculate</button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

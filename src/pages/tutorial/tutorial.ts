@@ -19,7 +19,12 @@ export class TutorialPage {
   showSkip = true;
   dir: string = 'ltr';
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
+  constructor(
+    public navCtrl: NavController, 
+    public menu: MenuController, 
+    translate: TranslateService, 
+    public platform: Platform) {
+
     this.dir = platform.dir();
     translate.get(["TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE1_DESCRIPTION",
@@ -29,7 +34,6 @@ export class TutorialPage {
       "TUTORIAL_SLIDE3_DESCRIPTION",
     ]).subscribe(
       (values) => {
-        console.log('Loaded values', values);
         this.slides = [
           {
             title: values.TUTORIAL_SLIDE1_TITLE,
@@ -68,7 +72,7 @@ export class TutorialPage {
 
   ionViewWillLeave() {
     // enable the root left menu when leaving the tutorial page
-    this.menu.enable(true);
+    //this.menu.enable(true);
   }
 
 }

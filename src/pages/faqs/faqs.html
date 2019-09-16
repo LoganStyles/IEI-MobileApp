@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>FAQs</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="page-background calculator">
+  <p *ngIf="!faqs" class="white-bg" padding>Loading, please wait...</p>
+  <ion-searchbar *ngIf="faqs" (ionInput)="filterFaqs($event)"></ion-searchbar>
+  <ion-list>
+    <ion-card *ngFor="let faq of faqs" (tap)="showDetails(faq)">
+      <ion-card-header text-wrap class="list-header">{{faq.question}}</ion-card-header>
+      <ion-card-content *ngIf="selectedFAQ && selectedFAQ === faq">
+        <div>{{selectedFAQ.answer}}</div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

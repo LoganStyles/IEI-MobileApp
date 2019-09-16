@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { TutorialPage } from './tutorial';
 import { TranslateModule } from '@ngx-translate/core';
 
+
 @NgModule({
   declarations: [
     TutorialPage,

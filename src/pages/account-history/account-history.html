@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Account History</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding class="page-background">
+    <div padding class="white-bg">
+      <ion-card *ngFor="let contribution of contributions" (tap)="showDetails(contribution.TRANS_ID)">
+        <ion-card-header class="list-header">
+          <ion-row>
+            <ion-col width-50>{{contribution.CONTRIBUTION_DATE | date: 'mediumDate'}}</ion-col>
+            <ion-col width-50>{{contribution.TOTAL_CONTRIBUTION | number: '.2'}}</ion-col>          
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content *ngIf="selectedContribution && selectedContribution === contribution">
+          <ion-row>
+            <ion-col width-50>Employee:</ion-col>
+            <ion-col width-50 class="text-right">{{selectedContribution.EMPLOYEE_CONTRIBUTION | number: '.2'}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col width-50>Employer:</ion-col>
+            <ion-col width-50 class="text-right">{{selectedContribution.EMPLOYER_CONTRIBUTION | number: '.2'}}</ion-col>
+          </ion-row>
+          <hr>
+          <ion-row class="text-bold">
+            <ion-col width-50>Total:</ion-col>
+            <ion-col width-50 class="text-right">{{selectedContribution.TOTAL_CONTRIBUTION | number: '.2'}}</ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>

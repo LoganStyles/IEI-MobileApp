@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Downloads</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="page-background calculator">
+  <p *ngIf="!downloads" class="white-bg" padding>Loading, please wait...</p>
+  <ion-searchbar *ngIf="downloads" (ionInput)="filterDownloads($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item text-wrap *ngFor="let download of downloads">
+      <a href="https://ieianchorpensions.com/uploads/documents/checklist-requirement/{{download.file_name}}">{{download.title}}</a>
+      <!--<a href="https://ieianchorpensions.com/downloads/{{download.file_name}}">{{download.title}}</a>-->
+    </ion-item>
+  </ion-list>
+</ion-content>

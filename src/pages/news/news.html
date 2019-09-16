@@ -1,0 +1,193 @@
+<ion-header>
+
+    <ion-navbar  color="primary">
+        <button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{ 'NEWS_MASTER_TITLE' | translate }}</ion-title>
+        
+    </ion-navbar>
+    
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card>
+  
+        <img src="assets/img/uploads/datacapture1.png"/>
+    
+        <ion-card-content>
+          <ion-card-title>
+            REQUIREMENTS FOR DATA RECAPTURE
+          </ion-card-title>
+          <p>
+            Ensure to come along with the above stated items for the Data Recapture exercise.
+          </p>
+        </ion-card-content>
+    
+        <ion-row no-padding>
+          <!-- <ion-col>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='musical-notes'></ion-icon>
+              Listen
+            </button>
+          </ion-col> 
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>-->
+        </ion-row>
+    
+      </ion-card>
+    
+      <ion-card>
+    
+        <div>
+          <img src="assets/img/uploads/rsa_money.png"/>
+        </div>
+    
+        <ion-card-content>
+          <ion-card-title>
+            Opening a Pensions Savings Account
+          </ion-card-title>
+          <p>
+            Opening a Retirement Savings Account doesn’t get any easier... Kindly visit our website to download our RSA form now http://ieianchorpensions.com/?resources_downloads
+          </p>
+        </ion-card-content>
+    
+        <ion-row no-padding>
+         <!-- <ion-col>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='musical-notes'></ion-icon>
+              Listen
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>-->
+        </ion-row>
+    
+      </ion-card>
+    
+
+      <ion-card>
+    
+        <div>
+          <img src="assets/img/uploads/new_employer.jpg"/>
+        </div>
+    
+        <ion-card-content>
+          <ion-card-title>
+            HOW DO I CONTINUE MAKING CONTRIBUTIONS WITH A NEW EMPLOYER?
+          </ion-card-title>
+          <p>            
+            1. Submit your RSA Pin to your new employer.<br>
+            2. Update your bio data with us for prompt remittance of funds.
+
+          </p>
+        </ion-card-content>
+    
+        <ion-row no-padding>
+          <!--<ion-col>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='musical-notes'></ion-icon>
+              Listen
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>-->
+        </ion-row>
+    
+      </ion-card>
+    
+      <ion-card>
+    
+        <div>
+          <img src="assets/img/uploads/never_too_late.jpg"/>
+        </div>
+    
+        <ion-card-content>
+          <ion-card-title>
+            IT'S NEVER TOO LATE
+          </ion-card-title>
+          <p>
+            It is never too late to be what you might have been.
+          </p>
+        </ion-card-content>
+    
+        <ion-row no-padding>
+          <!--<ion-col>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-start>
+              <ion-icon name='musical-notes'></ion-icon>
+              Listen
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-start (click)="share()">
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>-->
+        </ion-row>
+    
+      </ion-card>
+    
+
+  <!-- <ion-list>
+    <ion-item-sliding *ngFor="let item of news">
+      <button ion-item (click)="showDetails(item)">
+        <ion-avatar item-start>
+          <img src="assets/img/appicon.png" />
+        </ion-avatar>
+        <h2>{{item.title}}</h2>
+        <p>{{item.excerpt}}</p>
+      </button>
+
+      
+      
+    </ion-item-sliding>
+  </ion-list> -->
+  <ion-fab right bottom>
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab  (click)="loadFacebook()"><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab  (click)="loadTwitter()"><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab  (click)="loadInstagram()"><ion-icon name="logo-instagram"></ion-icon></button>
+      <button ion-fab  (click)="loadLinkedin()"><ion-icon name="logo-linkedin"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

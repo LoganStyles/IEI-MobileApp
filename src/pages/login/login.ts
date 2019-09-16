@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, AlertController, ToastController, LoadingController,Loading,Events } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { User } from '../../providers';
 import { MainPage } from '../';
@@ -11,40 +12,109 @@ import { MainPage } from '../';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
-  };
+  loading: Loading;
 
+  account: { userName: string, password: string } = {
+    userName: '',
+    password: ''
+  };
+  credentialsForm: FormGroup;
+  pleaseWait: boolean = false;
   // Our translated text strings
   private loginErrorString: string;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public loadingCtrl: LoadingController,
+    public navCtrl: NavController,
     public user: User,
+    public menu: MenuController,
     public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    private alertController: AlertController,
+    public translateService: TranslateService,
+    private formBuilder: FormBuilder,
+    public events:Events) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
-    })
+    });
+    this.credentialsForm = this.formBuilder.group({
+      username: [''],
+      password: ['']
+    });
+  }
+
+  ionViewDidLoad() {
   }
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
+    this.account.userName = this.credentialsForm.value.username;
+    this.account.password = this.credentialsForm.value.password;
+
+    if ((this.account.userName === undefined || this.account.userName === 'undefined' || this.account.userName === '') || (this.account.password === undefined || this.account.password === 'undefined' || this.account.password === '')) {
+      this.showError('Username or password is required');
+    } else {
+
+      try {
+        this.loading = this.loadingCtrl.create({
+          content: 'Please wait...',
+          duration: 40000,
+          dismissOnPageChange: true
+        });
+        this.loading.present();
+
+        this.user.login(this.account).subscribe((resp) => {
+          this.navCtrl.setRoot(MainPage);
+        }, (err) => {
+          // Unable to log in
+          let toast = this.toastCtrl.create({
+            message: this.loginErrorString,
+            duration: 30000,
+            position: 'top'
+          });
+          toast.present();
+        });
+
+      } catch (e) {
+        this.showError('A server internal error occured. Please try again.');
+      } finally {
+        this.pleaseWait = false;
+        // let curr_user = JSON.parse(window.localStorage.getItem('profile'));
+        // let curr_username=curr_user.FirstName;
+        //publish user_type event
+        this.events.publish('user_type','registered_client');
+      }
+
+
+    }
+
+
   }
+
+  // setSideMenu(){
+
+  // }
+
+  ionViewDidEnter() {
+    // the root left menu should be disabled on the login page
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave() {
+    // enable the root left menu when leaving the tutorial page
+    this.menu.enable(true);
+  }
+
+  showError(err: any) {
+    if (err) {
+      let alert = this.alertController.create({
+        title: 'Login Failed!',
+        subTitle: err,
+        buttons: ['OK']
+      });
+
+      alert.present();
+    }
+  }
+
 }

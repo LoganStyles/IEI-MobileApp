@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Feedback</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="page-background no-link">
+
+  <div class="form-wrap">
+    <form [formGroup]="feedbackForm" (ngSubmit)="sendComment()">
+
+      <ion-item>
+        <ion-label stacked>Your comment</ion-label>
+        <ion-textarea [formControl]="feedbackForm.controls['comment']"
+            rows="7" required>
+          </ion-textarea>
+      </ion-item>
+    
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button full type="submit" class="sign-up-button2">
+            Send
+          </button>
+          <p *ngIf="pleaseWait" class="white-bg" padding>Sending your feedback...</p>
+        </ion-col>
+      </ion-row>
+    
+    </form>
+  </div>
+</ion-content>

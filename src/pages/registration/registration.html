@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      New Client Registration
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+
+  <form [formGroup]="registrationForm">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>{{ 'FIRSTNAME' | translate }}</ion-label>
+        <ion-input [formControl]="registrationForm.controls['firstname']" type="text">
+        </ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label fixed>{{ 'SURNAME' | translate }}</ion-label>
+        <ion-input [formControl]="registrationForm.controls['surname']" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'PHONE' | translate }}</ion-label>
+        <ion-input [formControl]="registrationForm.controls['phone']" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+        <ion-input [formControl]="registrationForm.controls['email']" type="email"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>{{ 'DOB' | translate }}</ion-label>
+        <ion-datetime [formControl]="registrationForm.controls['dob']" style="width: 60%" displayFormat="DD/MM/YYYY"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>{{ 'EMPLOYER' | translate }}</ion-label>
+        <ion-input [formControl]="registrationForm.controls['employer']" type="text"></ion-input>
+      </ion-item>
+
+      <ion-buttons>
+        <button ion-button icon-left (click)="presentActionSheet()">
+          <ion-icon name="camera"></ion-icon>Select Image
+        </button>
+      </ion-buttons>
+
+      <div padding>
+        <button ion-button color="primary" block type="submit" class="sign-up-button2" (click)="uploadImage()">
+            <ion-icon name="cloud-upload"></ion-icon> {{ 'SIGNUP_BUTTON' | translate }}
+        </button>
+      </div>
+
+    </ion-list>
+
+  </form>
+</ion-content>
