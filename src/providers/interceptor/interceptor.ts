@@ -29,7 +29,8 @@ export class InterceptorProvider implements HttpInterceptor {
       return next.handle(cloneReq).pipe(
         catchError(error => {
           //perhaps display an error for specific status codes here 
-          let msg = error.message;
+          let msg = "An Error Ocurred with this request";
+          // let msg = error.message;
           let alert = this.alertCtrl.create({
             title: error.name,
             message:msg,
@@ -47,12 +48,11 @@ export class InterceptorProvider implements HttpInterceptor {
 
   //adds the token to tyour headers ifit exists
   private addToken(request: HttpRequest <any>,token:any){
-    console.log('token '+token);
+
     if(token){
       let clone: HttpRequest <any>;
       let cookieString:string;
       cookieString='loggedUser='+token;
-      console.log('cookie with existing token '+cookieString);
 
       clone = request.clone({
         withCredentials : true, 

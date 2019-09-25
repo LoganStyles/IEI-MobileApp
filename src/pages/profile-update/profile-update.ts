@@ -12,7 +12,6 @@ export class ProfileUpdatePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileUpdatePage');
   }
 
 }

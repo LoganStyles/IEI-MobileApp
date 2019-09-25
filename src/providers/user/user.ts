@@ -1,4 +1,3 @@
-// import { User } from './user';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
@@ -9,7 +8,7 @@ export class User {
   _user: any;
   isLoggedIn: boolean = false;
   authenticated = false;
-  message='';
+ 
   private userPin:string;
   private cookieString: string;
   
@@ -60,29 +59,22 @@ export class User {
       });
   }
 
-  getContributionsByDateRange(){
+  getContributionsByDateRange(contributionReq:any){
     return this.api.post('get-contribution-details-by-date-range', {'pin':this.userPin}).map((res:any) =>{
       return res;
     });
 }
 
   setAuthState(authenticated){
-    console.log('checking authentication');
     if(authenticated){
-      console.log('About to store authentication');
       this.storage.set('userCookie',this.cookieString).then(()=>{
       this.authenticated=true;
       this.getBioData();
       });
     }else{
-      console.log('About to remove authentication');
       this.storage.remove('userCookie').then(() => {
         this.authenticated = false;
-        console.log('authentication STATUS '+this.authenticated);
-        console.log('authentication should b false');
       });
-
-      // console.log('authenticated status '+this.authenticated);
     }
   }
 

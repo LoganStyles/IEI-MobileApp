@@ -17,8 +17,6 @@ export class LoginPage {
   loading: Loading;
   profile: any;
 
-  // url: string='https://ffpro.ieianchorpensions.com/wildfly/FFPSelfService-web/rest/selfservice';
-
   account: { username: string, password: string } = {
     username: '',
     password: ''
@@ -55,7 +53,6 @@ export class LoginPage {
   ionViewDidLoad() {
   }
 
-  
 
   // Attempt to login in through our User service
   doLogin() {
@@ -101,9 +98,7 @@ export class LoginPage {
 
   }
 
-  // setSideMenu(){
 
-  // }
 
   ionViewDidEnter() {
     // the root left menu should be disabled on the login page

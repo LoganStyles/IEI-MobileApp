@@ -35,7 +35,6 @@ export class RegistrationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegistrationPage');
   }
 
   private resetForm(){
@@ -91,9 +90,7 @@ export class RegistrationPage {
         this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            console.log(correctPath)
             let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            console.log(currentName)
             this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
           });
       } else {
@@ -158,7 +155,6 @@ export class RegistrationPage {
    
     // File name only
     var filename = this.lastImage;
-    // console.log('filename '+filename)
    
     var options = {
       fileKey: "file",
@@ -184,15 +180,11 @@ export class RegistrationPage {
    
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options).then(data => {
-      // console.log('response data')
-      // console.log(data)
       this.loading.dismissAll();
       this.presentToast('Your registration was succesful, one of our agents will contact you soon. Thank you');
       this.resetForm();
       this.lastImage=null;
     }, err => {
-      // console.log('response error')
-      console.log(err)
       this.loading.dismissAll()
       this.presentToast('There was an error while submitting your details, check the size of the uploaded file.');
     });

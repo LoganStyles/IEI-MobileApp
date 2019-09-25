@@ -87,7 +87,6 @@ export class MyApp {
           { title: 'Branches', component: 'BranchesPage',icon:'pin' },
           { title: 'Downloads', component: 'DownloadsPage',icon:'cloud-download' },
           { title: 'FAQs', component: 'FaqsPage',icon:'paper' },
-          //{ title: 'Feedback', component: 'FeedbackPage',icon:'text' },          
           { title: 'Register With Us', component: 'RegistrationPage',icon:'list-box' }          
         ];
         break;

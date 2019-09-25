@@ -10,18 +10,17 @@
   <ion-content padding class="page-background">
     <p *ngIf="!RSABalance" class="white-bg" padding>Loading, please wait...</p>
     <div padding class="white-bg">
+      <p>Account Summary as at {{toDay}}</p>
       <fieldset>
-        <legend>
-          Account Summary
-        </legend>
+        <legend>     {{schemeName}}  </legend>
         <!-- <strong>
           Fund Type:
           <span [style.color]="getAccountStatusColor()">{{profile.AccountStatus}}</span>
-        </strong> -->
+        </strong> 
         <p>
           <strong>Fund Type:</strong>
-          <br> {{schemeName}}
-        </p>
+          <br> 
+        </p>-->
         <p>
           <strong>Current Value</strong>
           <br>NGN {{RSABalance}}
@@ -45,6 +44,42 @@
         <p>
           <strong>Unit Price</strong>
           <br>{{unitPrice}}
+        </p>
+        
+      </fieldset>
+      <hr>
+
+      <fieldset>
+        <legend>
+            {{schemeName}} Voluntary
+        </legend>
+        <p>
+          <strong>Fund Type:</strong>
+          <br> {{vschemeName}}
+        </p>
+        <p>
+          <strong>Current Value</strong>
+          <br>NGN {{vRSABalance}}
+        </p>
+        <p>
+          <strong>Total Contribution</strong>
+          <br>NGN {{vtotalContribution}}
+        </p>
+        <p>
+          <strong>Net Contribution</strong>
+          <br>NGN {{vnetContribution}}
+        </p>
+        <p>
+          <strong>Growth</strong>
+          <br>{{vGrowth}}
+        </p>
+        <p>
+          <strong>Total Units</strong>
+          <br>{{vTotalUnits}}
+        </p>
+        <p>
+          <strong>Unit Price</strong>
+          <br>{{vUnitPrice}}
         </p>
         
         <!--<p>

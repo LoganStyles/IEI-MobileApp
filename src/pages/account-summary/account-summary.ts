@@ -17,6 +17,7 @@ export class AccountSummaryPage implements OnInit {
 
   profile: any;
   RSABalance: string = '0.00';
+  fundID:number;
   fundType:string;
   schemeName:string;
   totalContribution:string;
@@ -24,6 +25,17 @@ export class AccountSummaryPage implements OnInit {
   growth:string;
   totalUnits:string;
   unitPrice:string;
+
+  vRSABalance: string = '0.00';
+  vfundType:string;
+  vschemeName:string;
+  vtotalContribution:string;
+  vnetContribution:string;
+  vGrowth:string;
+  vTotalUnits:string;
+  vUnitPrice:string;
+
+  toDay:string;
 
   startDate: Date;
   endDate: Date;
@@ -34,6 +46,8 @@ export class AccountSummaryPage implements OnInit {
 
   balances: Observable<any>;
   contributions: Observable<any>;
+
+  contributionReq: { fundId: number, pin: string,type :string,startDate:string,endDate:string } ;
 
   constructor(
     public navCtrl: NavController,
@@ -52,6 +66,8 @@ export class AccountSummaryPage implements OnInit {
 
   ngOnInit() {
     this.profile = JSON.parse(window.localStorage.getItem('profile'));
+    this.userPIN=this.profile.pin;
+
       try {
         this.presentLoading();
 
@@ -61,13 +77,27 @@ export class AccountSummaryPage implements OnInit {
           if(this.accountBalances !=null){
 
             this.RSABalance = parseFloat(this.accountBalances.balanceMandatory).toFixed(2).toLocaleString();
-            this.fundType=this.getFundType(this.accountBalances.fundId);
+            this.fundID=this.accountBalances.fundId;
+            this.fundType=this.getFundType(this.fundID);
             this.schemeName=this.accountBalances.schemeName;
             this.totalContribution=parseFloat(this.accountBalances.totalContributionMandatory).toFixed(2).toLocaleString();
             this.netContribution=parseFloat(this.accountBalances.netContributionMandatory).toFixed(2).toLocaleString();
             this.growth=parseFloat(this.accountBalances.growthMandatory).toFixed(2).toLocaleString();
             this.totalUnits=parseFloat(this.accountBalances.totalUnitMandatory).toFixed(2).toLocaleString();
             this.unitPrice=this.accountBalances.unitPrice;
+
+            //voluntary
+            this.vRSABalance = parseFloat(this.accountBalances.balanceVoluntary).toFixed(2).toLocaleString();
+            this.vschemeName=this.accountBalances.schemeName;
+            this.vtotalContribution=parseFloat(this.accountBalances.totalContributionVoluntary).toFixed(2).toLocaleString();
+            this.vnetContribution=parseFloat(this.accountBalances.netContributionVoluntary).toFixed(2).toLocaleString();
+            this.vGrowth=parseFloat(this.accountBalances.growthVoluntary).toFixed(2).toLocaleString();
+            this.vTotalUnits=parseFloat(this.accountBalances.totalUnitVoluntary).toFixed(2).toLocaleString();
+            this.vUnitPrice=this.accountBalances.price;
+
+            //get today's date
+            var today = new Date();
+            this.toDay = today.toDateString();
           }
 
         }, (err) => {
@@ -146,13 +176,17 @@ export class AccountSummaryPage implements OnInit {
         this.showError('End date cannot be earlier than start date');
       } else {
 
-  console.log('startdate '+this.startDate);
-  console.log('endDate '+this.endDate);
 
   try {
   this.presentLoading();
 
-        this.user.getSummary().subscribe((resp) => {
+  this.contributionReq.startDate=this.startDate.toString();
+  this.contributionReq.endDate=this.endDate.toString();
+  this.contributionReq.fundId=this.fundID;
+  this.contributionReq.pin=this.userPIN;
+  this.contributionReq.type=this.profile.gender;
+
+        this.user.getContributionsByDateRange(this.contributionReq).subscribe((resp) => {
           this.accountBalances = resp;
           if(this.accountBalances !=null){
 
