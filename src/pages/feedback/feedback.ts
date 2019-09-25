@@ -38,10 +38,13 @@ export class FeedbackPage {
 
   sendComment() {
     try {
+      this.comment = this.feedbackForm.value.comment;
+
       if (!this.comment) {
         this.showMessage('Your comment is required.');
       } else {
-        var url = 'https://ieianchorpensions.com?api_send_comment&PIN=' + this.profile.PIN + '&email=' + this.profile.Email + '&name=' + this.profile.FirstName + ' ' + this.profile.Surname + '&comment=' + this.comment;
+        //var url = 'http://localhost:81/IEIHuersusFresh/public/api/api_send_comment?PIN=' + this.profile.PIN + '&email=' + this.profile.Email + '&name=' + this.profile.FirstName + ' ' + this.profile.Surname + '&comment=' + this.comment;
+         var url = 'https://ieianchorpensions.com/api/api_send_comment?PIN=' + this.profile.PIN + '&email=' + this.profile.Email + '&name=' + this.profile.FirstName + ' ' + this.profile.Surname + '&comment=' + this.comment;
 
         this.pleaseWait = true;
 
@@ -54,7 +57,7 @@ export class FeedbackPage {
             this.pleaseWait = false;
           },
             err => {
-              this.showMessage('An internal server error occured!');
+              this.showMessage('An1 internal server error occured!');
             });
       }
     } catch (e) {

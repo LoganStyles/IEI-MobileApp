@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
+import { User } from '../../providers';
 import { AccountProvider } from '../../providers';
 import { MainPage } from '../';
 import { AccountHistoryPage } from '../account-history/account-history';
@@ -16,61 +17,91 @@ export class AccountSummaryPage implements OnInit {
 
   profile: any;
   RSABalance: string = '0.00';
+  fundType:string;
+  schemeName:string;
+  totalContribution:string;
+  netContribution:string;
+  growth:string;
+  totalUnits:string;
+  unitPrice:string;
+
   startDate: Date;
   endDate: Date;
   loading: any;
   pleaseWait: boolean = false;
   userPIN: any;
+  accountBalances:any;
 
   balances: Observable<any>;
   contributions: Observable<any>;
 
-
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public user: User,
     private alertController: AlertController,
     private httpClient: HttpClient,
     private loadingCtrl: LoadingController,
-    public account: AccountProvider, ) { }
+    public account: AccountProvider, ) {
+      
+     }
 
   ionViewDidLoad() {
   }
+  
 
   ngOnInit() {
     this.profile = JSON.parse(window.localStorage.getItem('profile'));
-
-    if (window.localStorage.getItem('RSABalance') === null || window.localStorage.getItem('RSABalance') === 'undefined') {
-
       try {
         this.presentLoading();
-        var loginUrl = 'http://41.223.131.235/ieia_api/api/RSA/GetRSABalance?PIN=' + encodeURI(this.profile.PIN);
-        this.balances = this.httpClient.get(loginUrl);
-        this.balances
-          .subscribe(balanceData => {
-            var result = JSON.parse(balanceData);
-            this.RSABalance = result.Balance;
 
-          },
-            err => {
-              this.RSABalance = '0.00';
-              this.showError('Error fetching RSA Balance.');
-            },
-            () => {
-              window.localStorage.setItem('RSABalance', this.RSABalance);
-            });
+        this.user.getSummary().subscribe((resp) => {
+          
+          this.accountBalances = resp;
+          if(this.accountBalances !=null){
+
+            this.RSABalance = parseFloat(this.accountBalances.balanceMandatory).toFixed(2).toLocaleString();
+            this.fundType=this.getFundType(this.accountBalances.fundId);
+            this.schemeName=this.accountBalances.schemeName;
+            this.totalContribution=parseFloat(this.accountBalances.totalContributionMandatory).toFixed(2).toLocaleString();
+            this.netContribution=parseFloat(this.accountBalances.netContributionMandatory).toFixed(2).toLocaleString();
+            this.growth=parseFloat(this.accountBalances.growthMandatory).toFixed(2).toLocaleString();
+            this.totalUnits=parseFloat(this.accountBalances.totalUnitMandatory).toFixed(2).toLocaleString();
+            this.unitPrice=this.accountBalances.unitPrice;
+          }
+
+        }, (err) => {
+          this.RSABalance = '0.00';
+          this.showError('Error fetching RSA Balance.');
+        });
 
       } catch (e) {
         this.showError('A server internal error occured. Please try again.');
       } finally {
         this.pleaseWait = false;
       }
-    } else {
+  }
 
-      this.RSABalance = window.localStorage.getItem('RSABalance');
+  getFundType(fundID){
 
+    var selectedFundID="RSA FUND ";
+
+    switch(fundID){
+      case '1':
+          selectedFundID+="II";
+          break;
+      case '73':
+      selectedFundID+="I";
+      break;
+      case '74':
+      selectedFundID+="III";
+      break;
+      case '12':
+      selectedFundID+="IV";
+      break;
     }
+
+    return selectedFundID;
   }
 
   presentLoading() {
@@ -99,13 +130,13 @@ export class AccountSummaryPage implements OnInit {
   }
 
 
-  getAccountStatusColor() {
-    if (this.profile.AccountStatus === 'Funded') {
-      return "green";
-    } else {
-      return "red";
-    }
-  }
+  // getAccountStatusColor() {
+  //   if (this.profile.AccountStatus === 'Funded') {
+  //     return "green";
+  //   } else {
+  //     return "red";
+  //   }
+  // }
 
   searchTransactions() {
     if (this.startDate === null || this.startDate === undefined || this.endDate === null || this.endDate === undefined) {
@@ -114,25 +145,57 @@ export class AccountSummaryPage implements OnInit {
       if (this.startDate > this.endDate) {
         this.showError('End date cannot be earlier than start date');
       } else {
-        this.pleaseWait = true;
-        try {
 
-          var loginUrl = 'http://41.223.131.235/ieia_api/api/RSA/GetContributionHistory?PIN=' + encodeURI(this.profile.PIN) + '&startDate=' + encodeURI(this.startDate.toString()) + '&endDate=' + encodeURI(this.endDate.toString());
-          this.contributions = this.httpClient.get(loginUrl);
-          this.contributions
-            .subscribe(contributionData => {
-              this.navCtrl.push(AccountHistoryPage, { contributions: JSON.parse(contributionData) });
+  console.log('startdate '+this.startDate);
+  console.log('endDate '+this.endDate);
 
-            },
-              err => {
-                this.showError(err);
-              });
+  try {
+  this.presentLoading();
 
-        } catch (e) {
-          this.showError('A server internal error occured. Please try again.');
-        } finally {
-          this.pleaseWait = false;
-        }
+        this.user.getSummary().subscribe((resp) => {
+          this.accountBalances = resp;
+          if(this.accountBalances !=null){
+
+            this.RSABalance = parseFloat(this.accountBalances.balanceMandatory).toFixed(2).toLocaleString();
+            this.fundType=this.getFundType(this.accountBalances.fundId);
+            this.schemeName=this.accountBalances.schemeName;
+            this.totalContribution=parseFloat(this.accountBalances.totalContributionMandatory).toFixed(2).toLocaleString();
+            this.netContribution=parseFloat(this.accountBalances.netContributionMandatory).toFixed(2).toLocaleString();
+            this.growth=parseFloat(this.accountBalances.growthMandatory).toFixed(2).toLocaleString();
+            this.totalUnits=parseFloat(this.accountBalances.totalUnitMandatory).toFixed(2).toLocaleString();
+            this.unitPrice=this.accountBalances.unitPrice;
+          }
+
+        }, (err) => {
+          this.RSABalance = '0.00';
+          this.showError('Error fetching RSA Balance.');
+        });
+
+      } catch (e) {
+        this.showError('A server internal error occured. Please try again.');
+      } finally {
+        this.pleaseWait = false;
+      }
+
+        // this.pleaseWait = true;
+        // try {
+
+        //   var loginUrl = 'http://41.223.131.235/ieia_api/api/RSA/GetContributionHistory?PIN=' + encodeURI(this.profile.PIN) + '&startDate=' + encodeURI(this.startDate.toString()) + '&endDate=' + encodeURI(this.endDate.toString());
+        //   this.contributions = this.httpClient.get(loginUrl);
+        //   this.contributions
+        //     .subscribe(contributionData => {
+        //       this.navCtrl.push(AccountHistoryPage, { contributions: JSON.parse(contributionData) });
+
+        //     },
+        //       err => {
+        //         this.showError(err);
+        //       });
+
+        // } catch (e) {
+        //   this.showError('A server internal error occured. Please try again.');
+        // } finally {
+        //   this.pleaseWait = false;
+        // }
       }
     }
 

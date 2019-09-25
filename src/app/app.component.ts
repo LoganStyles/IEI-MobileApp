@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -42,7 +43,7 @@ export class MyApp {
   clientName: string = '';
   userType:string='';
 
-  constructor(private translate: TranslateService,
+  constructor(private translate: TranslateService, 
     platform: Platform,
     settings: Settings,
     private config: Config, private statusBar: StatusBar,
@@ -57,7 +58,7 @@ export class MyApp {
     });
 
     events.subscribe('user_type',(usertype,username)=>{
-      //console.log('A '+usertype+' has connected');
+      
       this.clientName =username;
       this.setSideBarMenus(usertype);
 
@@ -86,7 +87,7 @@ export class MyApp {
           { title: 'Branches', component: 'BranchesPage',icon:'pin' },
           { title: 'Downloads', component: 'DownloadsPage',icon:'cloud-download' },
           { title: 'FAQs', component: 'FaqsPage',icon:'paper' },
-          { title: 'Feedback', component: 'FeedbackPage',icon:'text' },          
+          //{ title: 'Feedback', component: 'FeedbackPage',icon:'text' },          
           { title: 'Register With Us', component: 'RegistrationPage',icon:'list-box' }          
         ];
         break;

@@ -12,14 +12,33 @@ import { ProfileUpdatePage } from '../profile-update/profile-update';
 
 export class ProfilePage implements OnInit {
   profile: any;
+  dateOfBirth: string;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams) {
-  }
+    public navParams: NavParams) { }
+  
 
   ngOnInit() {
     this.profile = JSON.parse(window.localStorage.getItem('profile'));
+    var dob = this.profile.employees.dateOfBirth;
+
+    //format date
+    this.dateOfBirth=this.formatAPIDates(dob);
+  }
+
+  formatAPIDates(receivedDate){
+    var strippedDob=receivedDate.replace("[UTC]","");
+
+    var parsedDate = new Date(Date.parse(strippedDob));
+    // console.log('parsedDate '+parsedDate);
+
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = parsedDate.getFullYear();
+    var month = months[parsedDate.getMonth()];
+    var date = parsedDate.getDate();
+
+    return date + ' ' + month + ' ' + year ;
   }
 
   ionViewDidEnter() {

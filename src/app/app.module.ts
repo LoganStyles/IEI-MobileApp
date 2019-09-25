@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Camera,} from '@ionic-native/camera';
@@ -25,6 +25,7 @@ import { CalculatorOutputPageModule } from '../pages/calculator-output/calculato
 import { WelcomePageModule } from '../pages/welcome/welcome.module';
 import { RegistrationPageModule } from '../pages/registration/registration.module';
 import { NewsDetailPageModule } from '../pages/news-detail/news-detail.module';
+import { InterceptorProvider } from '../providers/interceptor/interceptor';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -85,7 +86,9 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AccountProvider,
-    SocialSharing
+    SocialSharing,
+    // InterceptorProvider
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider,multi:true}
   ]
 })
 export class AppModule { }

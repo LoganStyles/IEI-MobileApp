@@ -117,19 +117,19 @@ export class NewsPage {
 
     // Check if sharing via email is supported
 this.socialSharing.canShareViaEmail().then(() => {
-  console.log('sharing is possible')
+  // console.log('sharing is possible')
   // Sharing via email is possible
 }).catch(() => {
   // Sharing via email is not possible
-  console.log('sharing is NOT possible')
+  // console.log('sharing is NOT possible')
 });
 
 // Share via email
 this.socialSharing.shareViaEmail('Body', 'Subject', ['recipient@example.org']).then(() => {
   // Success!
-  console.log('sharing WILL BE is possible')
+  // console.log('sharing WILL BE is possible')
 }).catch(() => {
-  console.log('sharing WILL NOT BE is possible')
+  // console.log('sharing WILL NOT BE is possible')
   // Error!
 });
     // console.log(message);

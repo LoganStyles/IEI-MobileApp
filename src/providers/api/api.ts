@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string='http://41.223.131.235/ieia_api/api/RSA'
+  
+  url: string='https://ffpro.ieianchorpensions.com/wildfly/FFPSelfService-web/rest/selfservice'
 
   constructor(public http: HttpClient) {
   }

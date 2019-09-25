@@ -143,6 +143,7 @@ export class RegistrationPage {
 
   public uploadImage() {
     // Destination URL
+    // var url = 'http://localhost:81/IEIHuersusFresh/public/api/api_reg_client';
     var url = 'https://ieianchorpensions.com/api/api_reg_client';
 
     var firstname = this.registrationForm.value.firstname,
@@ -157,7 +158,7 @@ export class RegistrationPage {
    
     // File name only
     var filename = this.lastImage;
-    console.log('filename '+filename)
+    // console.log('filename '+filename)
    
     var options = {
       fileKey: "file",
@@ -183,8 +184,8 @@ export class RegistrationPage {
    
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options).then(data => {
-      console.log('response data')
-      console.log(data)
+      // console.log('response data')
+      // console.log(data)
       this.loading.dismissAll();
       this.presentToast('Your registration was succesful, one of our agents will contact you soon. Thank you');
       this.resetForm();

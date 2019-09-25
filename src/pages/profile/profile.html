@@ -12,70 +12,70 @@
   <ion-item-group>
     <ion-item-divider color="primary">BIO DATA</ion-item-divider>
     <ion-item> RSA PIN:
-      <ion-note item-end>{{profile.PIN}}</ion-note>
+      <ion-note item-end>{{profile.employees.pin}}</ion-note>
     </ion-item>
     <ion-item> Title:
-      <ion-note item-end>{{profile.Title}}</ion-note>
+      <ion-note item-end>{{profile.employees.title}}</ion-note>
     </ion-item>
     <ion-item> First Name:
-      <ion-note item-end>{{profile.FirstName}}</ion-note>
+      <ion-note item-end>{{profile.employees.firstname}}</ion-note>
     </ion-item>
     <ion-item> Surname:
-      <ion-note item-end>{{profile.Surname}}</ion-note>
+      <ion-note item-end>{{profile.employees.surname}}</ion-note>
     </ion-item>
     <ion-item> Gender:
-      <ion-note item-end>{{profile.Gender}}</ion-note>
+      <ion-note item-end>{{profile.employees.gender}}</ion-note>
     </ion-item>
-    <ion-item> Address:
-      <ion-note item-end>{{profile.Address}}</ion-note>
-    </ion-item>
+     <!-- <ion-item> Address:
+      <ion-note item-end>{{profile.userObject.Address}}</ion-note>
+    </ion-item> -->
     <ion-item> Email:
-      <ion-note item-end>{{profile.Email}}</ion-note>
+      <ion-note item-end>{{profile.employees.email}}</ion-note>
     </ion-item>
     <ion-item> Birth Date:
-      <ion-note item-end>{{profile.BirthDate | date: 'mediumDate'}}</ion-note>
-    </ion-item>
+      <ion-note item-end>{{dateOfBirth}}</ion-note>
+    </ion-item> 
     <ion-item> Phone:
-      <ion-note item-end>{{profile.Phone}}</ion-note>
+      <ion-note item-end>{{profile.employees.mobilePhone}}</ion-note>
     </ion-item>
-    <ion-item> Occupation:
+    <!-- <ion-item> Occupation:
       <ion-note item-end>{{profile.Occupation}}</ion-note>
-    </ion-item>
+    </ion-item> -->
     <ion-item> State of Posting:
-      <ion-note item-end>{{profile.StateOfPosting}}</ion-note>
-    </ion-item>
+      <ion-note item-end>{{profile.employees.stateOfPosting}}</ion-note>
+    </ion-item> 
   </ion-item-group>
 
   <ion-item-group>
       <ion-item-divider color="primary">NEXT OF KIN</ion-item-divider>
       <ion-item> Name:
-        <ion-note item-end>{{profile.NextOfKinName}}</ion-note>
+        <ion-note item-end>{{profile.employees.nokSurname }} {{profile.employees.nokOthername}} {{profile.employees.othernames}}</ion-note>
       </ion-item>
       <ion-item> Phone:
-        <ion-note item-end>{{profile.NextOfKinPhone}}</ion-note>
+        <ion-note item-end>{{profile.employees.nokMobilePhone}}</ion-note>
       </ion-item>
       <ion-item> Address:
-        <ion-note item-end>{{profile.NextOfKinAddress}}</ion-note>
+        <ion-note item-end>{{profile.employees.nokCorraddress1}} {{profile.employees.nokCorraddress2}}</ion-note>
       </ion-item>
       <ion-item> State:
-        <ion-note item-end>{{profile.NextOfKinState}}</ion-note>
+        <ion-note item-end>{{profile.employees.nokStatecode}}</ion-note>
       </ion-item>
       <ion-item> Relationship:
-        <ion-note item-end>{{profile.NextOfKinRelationship}}</ion-note>
-      </ion-item>
+        <ion-note item-end>{{profile.employees.nokRelationship}}</ion-note>
+      </ion-item> 
     </ion-item-group>
 
     <ion-item-group>
-        <ion-item-divider color="primary">EMPLOYER</ion-item-divider>
+         <ion-item-divider color="primary">EMPLOYER</ion-item-divider>
         <ion-item> Employer Name:
-          <ion-note item-end>{{profile.Employer}}</ion-note>
+          <ion-note item-end>{{profile.employees.employerName}}</ion-note>
         </ion-item>
         <ion-item> Employer Address:
-          <ion-note item-end>{{profile.EmployerAddress}}</ion-note>
+          <ion-note item-end>{{profile.employees.employerAddress}} {{profile.employees.employerAddress1}}</ion-note>
         </ion-item>
         <ion-item> Employer State:
-          <ion-note item-end>{{profile.EmployerState}}</ion-note>
-        </ion-item>
+          <ion-note item-end>{{profile.employees.employerStatecode}}</ion-note>
+        </ion-item> 
       </ion-item-group>
 
 </ion-content>

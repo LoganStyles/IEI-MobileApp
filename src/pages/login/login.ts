@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, MenuController, AlertController, ToastController, LoadingController,Loading,Events } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient} from '@angular/common/http';
 
 import { User } from '../../providers';
 import { MainPage } from '../';
+// import { map } from 'rxjs/operator/map';
 
 @IonicPage()
 @Component({
@@ -13,9 +15,12 @@ import { MainPage } from '../';
 })
 export class LoginPage {
   loading: Loading;
+  profile: any;
 
-  account: { userName: string, password: string } = {
-    userName: '',
+  // url: string='https://ffpro.ieianchorpensions.com/wildfly/FFPSelfService-web/rest/selfservice';
+
+  account: { username: string, password: string } = {
+    username: '',
     password: ''
   };
   credentialsForm: FormGroup;
@@ -24,6 +29,7 @@ export class LoginPage {
   private loginErrorString: string;
 
   constructor(
+    public http: HttpClient,
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public user: User,
@@ -37,21 +43,26 @@ export class LoginPage {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     });
+
     this.credentialsForm = this.formBuilder.group({
       username: [''],
       password: ['']
     });
+
+    
   }
 
   ionViewDidLoad() {
   }
 
+  
+
   // Attempt to login in through our User service
   doLogin() {
-    this.account.userName = this.credentialsForm.value.username;
+    this.account.username = this.credentialsForm.value.username;
     this.account.password = this.credentialsForm.value.password;
 
-    if ((this.account.userName === undefined || this.account.userName === 'undefined' || this.account.userName === '') || (this.account.password === undefined || this.account.password === 'undefined' || this.account.password === '')) {
+    if ((this.account.username === undefined || this.account.username === 'undefined' || this.account.username === '') || (this.account.password === undefined || this.account.password === 'undefined' || this.account.password === '')) {
       this.showError('Username or password is required');
     } else {
 
@@ -64,7 +75,8 @@ export class LoginPage {
         this.loading.present();
 
         this.user.login(this.account).subscribe((resp) => {
-          this.navCtrl.setRoot(MainPage);
+        this.navCtrl.setRoot(MainPage);
+
         }, (err) => {
           // Unable to log in
           let toast = this.toastCtrl.create({
@@ -79,8 +91,6 @@ export class LoginPage {
         this.showError('A server internal error occured. Please try again.');
       } finally {
         this.pleaseWait = false;
-        // let curr_user = JSON.parse(window.localStorage.getItem('profile'));
-        // let curr_username=curr_user.FirstName;
         //publish user_type event
         this.events.publish('user_type','registered_client');
       }

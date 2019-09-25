@@ -14,20 +14,46 @@
         <legend>
           Account Summary
         </legend>
-        <strong>
-          Status:
+        <!-- <strong>
+          Fund Type:
           <span [style.color]="getAccountStatusColor()">{{profile.AccountStatus}}</span>
-        </strong>
+        </strong> -->
         <p>
-          <strong>RSA Balance</strong>
+          <strong>Fund Type:</strong>
+          <br> {{schemeName}}
+        </p>
+        <p>
+          <strong>Current Value</strong>
           <br>NGN {{RSABalance}}
         </p>
         <p>
+          <strong>Total Contribution</strong>
+          <br>NGN {{totalContribution}}
+        </p>
+        <p>
+          <strong>Net Contribution</strong>
+          <br>NGN {{netContribution}}
+        </p>
+        <p>
+          <strong>Growth</strong>
+          <br>{{growth}}
+        </p>
+        <p>
+          <strong>Total Units</strong>
+          <br>{{totalUnits}}
+        </p>
+        <p>
+          <strong>Unit Price</strong>
+          <br>{{unitPrice}}
+        </p>
+        
+        <!--<p>
           <strong>Last Contribution Date</strong>
           <br>{{profile.LastContributionDate | date: 'mediumDate'}}
-        </p>
+        </p>-->
       </fieldset>
       <hr>
+      <!--
       <fieldset>
         <legend>
           Transaction History
@@ -52,5 +78,6 @@
           </button>
         </ion-list>
       </fieldset>
+      -->
     </div>
   </ion-content>
